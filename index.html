@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vida de Programador</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="shortcut icon" href="/imgs/icon-128.png">
+    <link rel="apple-touch-icon" href="/imgs/icon-apple.png">
+    <link rel="manifest" id="btnCancel" href="manifest.json">
+</head>
+<body>
+    <header>
+    <img src="imgs/logo.png" alt="">
+    </header>
+
+    <div id="alert">
+        <p>Deseja baixar?</p>
+        <button type="button" id="btnAdd" class="btn">baixar</button>
+        <button type="button" class="btn">Cancelar</button>
+    </div>
+
+    <main id="tirinhas">
+
+    </main>
+
+    <script src="js/tirinhas.js"></script>
+    <script src="js/funcoes.js"></script>
+    <script>
+        if ('serviceWorker' in navigator){
+            //registrar o sw em um escopo
+            navigator.serviceWorker.register("sw.js", { scope: '/' })
+            .then(function(register){
+                //verificar o que esta sendo feito
+                if( register.installing )
+                console.log('Instalado com sucesso')
+                else if (register.waiting)
+                console.log('SW em espera')
+                else if (register.active)
+                console.log('SW ativo')
+
+                console.log('SW registrado no escopo: '+register.scope);
+            })
+            .catch(function(error){
+                console.log('Erro ao registrat'+error)
+            })
+
+        }else {
+            alert('Atualiza seu navegador')
+        }
+    </script>
+</body>
+</html>
